@@ -1,0 +1,19 @@
+855 x 480 sample canvas size
+21 cherry
+30 strawberry
+40 grape
+45 tagnerine
+60 tomato
+75 apple
+85 ??
+105 peach
+120 pineapple
+145 melon
+160 watermelon?
+
+21 legend icon diameter
+140 legend diameter
+130 next fruit diameter
+160 score diameter
+90 x 60 player
+300 x 340 playfield

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://3j1bvfidmog0"]
+
+[ext_resource type="Script" path="res://fruit_display.gd" id="1_gembo"]
+[ext_resource type="PackedScene" uid="uid://co12pe0ajl0pk" path="res://fruit.tscn" id="1_ndikd"]
+
+[node name="FruitDisplay" type="Node2D"]
+script = ExtResource("1_gembo")
+
+[node name="Fruit" parent="." instance=ExtResource("1_ndikd")]
+max_contacts_reported = 0
+freeze = true

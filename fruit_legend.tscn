@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfa66t1nbt6xl"]
+
+[ext_resource type="Script" path="res://fruit_legend.gd" id="1_f3jkv"]
+
+[node name="FruitLegend" type="Node2D"]
+script = ExtResource("1_f3jkv")
+
+[connection signal="body_entered" from="Fruit" to="Fruit" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@25163" to="@RigidBody2D@25163" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@25164" to="@RigidBody2D@25164" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@25165" to="@RigidBody2D@25165" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@25166" to="@RigidBody2D@25166" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@25167" to="@RigidBody2D@25167" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@25168" to="@RigidBody2D@25168" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@25169" to="@RigidBody2D@25169" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@25170" to="@RigidBody2D@25170" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@25171" to="@RigidBody2D@25171" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@25172" to="@RigidBody2D@25172" method="_on_body_entered" flags=18]

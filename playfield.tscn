@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwy3c8ba23xnq"]
+
+[ext_resource type="PackedScene" uid="uid://crm7e1iuliqup" path="res://container.tscn" id="1_a5hla"]
+[ext_resource type="Script" path="res://playfield.gd" id="1_oyge5"]
+[ext_resource type="PackedScene" uid="uid://bu8l46p2gg14v" path="res://player.tscn" id="2_bckd3"]
+[ext_resource type="AudioStream" uid="uid://d0657ypkf4snw" path="res://sounds/drop.wav" id="4_rwn3w"]
+[ext_resource type="AudioStream" uid="uid://b3m5ys0a1bpre" path="res://sounds/merge.wav" id="5_l0b8j"]
+[ext_resource type="AudioStream" uid="uid://cwnur6da3k7wl" path="res://sounds/oh-1.wav" id="6_jvvq0"]
+[ext_resource type="AudioStream" uid="uid://ddpokmq5u2fsu" path="res://sounds/yume-ka.wav" id="7_jegqb"]
+
+[node name="Playfield" type="Node2D"]
+script = ExtResource("1_oyge5")
+container_height = 300.0
+best_score = 5769
+next_fruit = 1
+
+[node name="Container" parent="." instance=ExtResource("1_a5hla")]
+position = Vector2(0, 78)
+width = 300.0
+height = 300.0
+
+[node name="Player" parent="." instance=ExtResource("2_bckd3")]
+position = Vector2(160, 48)
+dropper_width = 2
+dropper_height = 330
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(0, 0, 0, 78, 320, 78, 320, 0)
+
+[node name="DropSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_rwn3w")
+max_polyphony = 2
+bus = &"SFX"
+
+[node name="MergeSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_l0b8j")
+max_polyphony = 4
+bus = &"SFX"
+
+[node name="GameOverSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_jvvq0")
+bus = &"SFX"
+
+[node name="ResetGameSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_jegqb")
+volume_db = 7.496
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
