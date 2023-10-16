@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b1m1fqx3udf75"]
+[gd_scene load_steps=10 format=3 uid="uid://b1m1fqx3udf75"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_4rfcx"]
 [ext_resource type="PackedScene" uid="uid://cwy3c8ba23xnq" path="res://playfield.tscn" id="1_qufcv"]
@@ -7,25 +7,34 @@
 [ext_resource type="PackedScene" uid="uid://bfa66t1nbt6xl" path="res://fruit_legend.tscn" id="5_w24og"]
 [ext_resource type="PackedScene" uid="uid://cov7ipnemtxng" path="res://game_over.tscn" id="6_s4q7u"]
 [ext_resource type="AudioStream" uid="uid://84nvii885sti" path="res://sounds/moon_flight.mp3" id="7_5nmro"]
+[ext_resource type="PackedScene" uid="uid://bm6i5ujyuld01" path="res://options_screen.tscn" id="7_b0s6m"]
+[ext_resource type="PackedScene" uid="uid://dfpmssolvr10g" path="res://start_screen.tscn" id="8_7217k"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_4rfcx")
 
 [node name="Playfield" parent="." instance=ExtResource("1_qufcv")]
-position = Vector2(239, 28)
+position = Vector2(267, 28)
 container_height = 340.0
-current_fruit = 0
+current_fruit = 2
+next_fruit = 2
 
 [node name="ScoreDisplay" parent="." instance=ExtResource("2_mqihc")]
-position = Vector2(111, 91)
+position = Vector2(134, 105)
 
 [node name="FruitDisplay" parent="." instance=ExtResource("4_s06ut")]
-position = Vector2(686, 99)
+position = Vector2(722, 125)
 
 [node name="FruitLegend" parent="." instance=ExtResource("5_w24og")]
-position = Vector2(713, 351)
+position = Vector2(722, 351)
 
 [node name="GameOver" parent="." instance=ExtResource("6_s4q7u")]
+visible = false
+
+[node name="OptionsScreen" parent="." instance=ExtResource("7_b0s6m")]
+visible = false
+
+[node name="StartScreen" parent="." instance=ExtResource("8_7217k")]
 
 [node name="GameMusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_5nmro")
@@ -35,19 +44,25 @@ bus = &"Music"
 [node name="MenuMusicPlayer" type="AudioStreamPlayer2D" parent="."]
 bus = &"Music"
 
+[connection signal="state_changed" from="." to="Playfield" method="_on_game_state_changed"]
+[connection signal="state_changed" from="." to="GameOver" method="_on_game_state_changed"]
+[connection signal="state_changed" from="." to="OptionsScreen" method="_on_game_state_changed"]
+[connection signal="state_changed" from="." to="StartScreen" method="_on_game_state_changed"]
 [connection signal="best_score_changed" from="Playfield" to="ScoreDisplay" method="_on_playfield_best_score_changed"]
-[connection signal="game_state_changed" from="Playfield" to="GameOver" method="_on_playfield_game_state_changed"]
 [connection signal="next_fruit_changed" from="Playfield" to="FruitDisplay" method="_on_playfield_next_fruit_changed"]
 [connection signal="score_changed" from="Playfield" to="ScoreDisplay" method="_on_playfield_score_changed"]
 [connection signal="score_changed" from="Playfield" to="GameOver" method="_on_playfield_score_changed"]
+[connection signal="set_game_state" from="Playfield" to="." method="_on_set_game_state"]
 [connection signal="body_entered" from="FruitLegend/Fruit" to="FruitLegend/Fruit" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@41119" to="FruitLegend/@RigidBody2D@41119" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@41120" to="FruitLegend/@RigidBody2D@41120" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@41121" to="FruitLegend/@RigidBody2D@41121" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@41122" to="FruitLegend/@RigidBody2D@41122" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@41123" to="FruitLegend/@RigidBody2D@41123" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@41124" to="FruitLegend/@RigidBody2D@41124" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@41125" to="FruitLegend/@RigidBody2D@41125" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@41126" to="FruitLegend/@RigidBody2D@41126" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@41127" to="FruitLegend/@RigidBody2D@41127" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@41128" to="FruitLegend/@RigidBody2D@41128" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@152466" to="FruitLegend/@RigidBody2D@152466" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@152467" to="FruitLegend/@RigidBody2D@152467" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@152468" to="FruitLegend/@RigidBody2D@152468" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@152469" to="FruitLegend/@RigidBody2D@152469" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@152470" to="FruitLegend/@RigidBody2D@152470" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@152471" to="FruitLegend/@RigidBody2D@152471" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@152472" to="FruitLegend/@RigidBody2D@152472" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@152473" to="FruitLegend/@RigidBody2D@152473" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@152474" to="FruitLegend/@RigidBody2D@152474" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@152475" to="FruitLegend/@RigidBody2D@152475" method="_on_body_entered" flags=18]
+[connection signal="request_save" from="OptionsScreen" to="Playfield" method="_on_options_screen_request_save"]
+[connection signal="set_game_state" from="OptionsScreen" to="." method="_on_set_game_state"]

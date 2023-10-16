@@ -1,6 +1,10 @@
-[gd_scene format=3 uid="uid://dfpmssolvr10g"]
+[gd_scene load_steps=2 format=3 uid="uid://dfpmssolvr10g"]
+
+[ext_resource type="Script" path="res://start_screen.gd" id="1_vcsbx"]
 
 [node name="StartScreen" type="Node2D"]
+visible = false
+script = ExtResource("1_vcsbx")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 offset_right = 844.0
@@ -11,20 +15,20 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "Pepper Game"
+text = "PEPPER_GAME"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "Start Game"
+text = "START_GAME"
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "Options"
+text = "OPTIONS"
 horizontal_alignment = 1
 
 [node name="Label4" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "Credits"
+text = "CREDITS"
 horizontal_alignment = 1

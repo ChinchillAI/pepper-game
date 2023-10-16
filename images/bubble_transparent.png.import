@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://onkmk20h3qwx"
-path="res://.godot/imported/mousepad.png-32d1654afdd07aef588db6e4ecc5e866.ctex"
+uid="uid://dvj5dgxt8fcuv"
+path="res://.godot/imported/bubble_transparent.png-0735bbb61a97a2e0f3e2147067c2d481.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/mousepad.png"
-dest_files=["res://.godot/imported/mousepad.png-32d1654afdd07aef588db6e4ecc5e866.ctex"]
+source_file="res://images/bubble_transparent.png"
+dest_files=["res://.godot/imported/bubble_transparent.png-0735bbb61a97a2e0f3e2147067c2d481.ctex"]
 
 [params]
 

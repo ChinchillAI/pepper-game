@@ -1,7 +1,7 @@
 @tool
 extends Node2D
 
-@export var radius := 80 : set = _set_radius
+@export var radius := 70 : set = _set_radius
 
 func _set_radius(new_radius):
 	radius = new_radius
@@ -9,7 +9,8 @@ func _set_radius(new_radius):
 
 func _create_legend():
 	for c in get_children():
-		remove_child(c)
+		if c.is_in_group("fruits"):
+			remove_child(c)
 	
 	for i in range(Fruit.FruitsEnum.size()):
 		var angle = (i + 1) * 2*PI / (Fruit.FruitsEnum.size() + 1) - PI/2

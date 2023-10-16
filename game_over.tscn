@@ -17,7 +17,6 @@ outline_size = 9
 outline_color = Color(0, 0, 0, 1)
 
 [node name="GameOver" type="Node2D"]
-visible = false
 script = ExtResource("1_k5lob")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
@@ -29,7 +28,7 @@ layout_mode = 2
 
 [node name="GameOverLabel" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "Game Over"
+text = "GAME_OVER"
 label_settings = SubResource("LabelSettings_w38e0")
 horizontal_alignment = 1
 
@@ -40,6 +39,6 @@ horizontal_alignment = 1
 
 [node name="PressRestart" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-text = "Press R to Restart"
+text = "PRESS_TO_RESTART"
 label_settings = SubResource("LabelSettings_4c8j1")
 horizontal_alignment = 1

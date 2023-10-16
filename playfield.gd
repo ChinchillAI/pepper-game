@@ -5,7 +5,7 @@ class_name Playfield
 signal score_changed(score)
 signal best_score_changed(score)
 signal next_fruit_changed(fruit_type)
-signal game_state_changed(state)
+signal set_game_state(state)
 
 @export var buffer_top := 30. : set = _set_buffer_top
 
@@ -18,7 +18,9 @@ signal game_state_changed(state)
 
 @export var player_score := 0 : set = _set_player_score
 @export var best_score := 0 : set = _set_best_score
+# this should really be playfield input accepted now, but w/e
 var game_over := false : set = _set_game_over
+var can_drop := true
 var last_mouse_position
 
 @export var max_fruit := Fruit.FruitsEnum.TOMATO
@@ -30,9 +32,13 @@ func _set_buffer_top(new_top):
 	_create_playfield()
 	
 func _set_game_over(state):
-	game_over = state
-	if not Engine.is_editor_hint():
-		game_state_changed.emit(game_over)
+	if game_over != state:
+		game_over = state
+		if not Engine.is_editor_hint():
+			if game_over:
+				set_game_state.emit(Game.States.GAMEOVER)
+			else:
+				set_game_state.emit(Game.States.PLAYING)
 
 func _set_container_width(new_width):
 	container_width = new_width
@@ -109,7 +115,16 @@ func _handle_score(points):
 # See https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html
 func _save_game():
 	var save_game = FileAccess.open("user://savegame.save", FileAccess.WRITE)
-	save_game.store_line(JSON.stringify({"best_score": best_score}))
+	save_game.store_line(JSON.stringify({
+		"best_score": best_score,
+		"music_mute": AudioServer.is_bus_mute(AudioServer.get_bus_index("Music")),
+		"music_vol": AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")),
+		"sfx_mute": AudioServer.is_bus_mute(AudioServer.get_bus_index("SFX")),
+		"sfx_vol": AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX")),
+		"master_mute": AudioServer.is_bus_mute(AudioServer.get_bus_index("Master")),
+		"master_vol": AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")),
+		"language": TranslationServer.get_locale()
+	}))
 	
 func _load_game():
 	if not FileAccess.file_exists("user://savegame.save"):
@@ -128,6 +143,21 @@ func _load_game():
 		var save_data = json.get_data()
 		
 		best_score = save_data["best_score"]
+		
+		if save_data.has("music_mute"):
+			AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), save_data["music_mute"])
+		if save_data.has("music_vol"):
+			AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), save_data["music_vol"])
+		if save_data.has("sfx_mute"):
+			AudioServer.set_bus_mute(AudioServer.get_bus_index("SFX"), save_data["sfx_mute"])
+		if save_data.has("sfx_vol"):
+			AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), save_data["sfx_vol"])
+		if save_data.has("master_mute"):
+			AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), save_data["master_mute"])
+		if save_data.has("master_vol"):
+			AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), save_data["master_vol"])
+		if save_data.has("language"):
+			TranslationServer.set_locale(save_data["language"])
 	
 
 func _physics_process(delta):
@@ -155,7 +185,9 @@ func _physics_process(delta):
 func _input(event):
 	if not Engine.is_editor_hint():
 		if not game_over:
-			if event.is_action_pressed("drop"):
+			if event.is_action_pressed("drop") and can_drop:
+				can_drop = false
+				$DropTimer.start()
 				var dropped_fruit = load("res://fruit.tscn").instantiate()
 				dropped_fruit.position = $Player.position
 				dropped_fruit.fruit_type = current_fruit
@@ -175,9 +207,9 @@ func _input(event):
 				)
 				next_fruit = randi() % max_fruit as Fruit.FruitsEnum
 				next_fruit_changed.emit(next_fruit)
-		else:
-			if event.is_action_pressed("drop"):
-				reset()
+			if event.is_action_pressed("ui_cancel"):
+				game_over = true
+				set_game_state.emit(Game.States.PAUSED)
 	if event.is_action_pressed("reset"):
 		reset()
 
@@ -206,3 +238,18 @@ func _on_area_2d_body_entered(body):
 		if body.in_play:
 			print("lost game")
 			_game_over()
+
+
+func _on_game_state_changed(state):
+	if state == Game.States.PLAYING:
+		game_over = false
+	else:
+		game_over = true
+
+
+func _on_drop_timer_timeout():
+	can_drop = true
+
+
+func _on_options_screen_request_save():
+	_save_game()
