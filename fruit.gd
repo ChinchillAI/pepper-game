@@ -1,7 +1,9 @@
 @tool
 class_name Fruit
 extends RigidBody2D
+
 signal score(points)
+signal made(fruit_type)
 
 enum FruitsEnum {
 	CHERRY,
@@ -146,7 +148,6 @@ func _process(_delta):
 	pass
 	
 func freeze_fruit():
-	print("freezing fruit")
 	freeze_me = true
 
 func _physics_process(_delta):
@@ -165,6 +166,7 @@ func _on_body_entered(body):
 			body.free()
 			call_deferred("_promote_fruit")
 			score.emit(pow(2,fruit_type + 1) - 1)
+			made.emit(fruit_type + 1)
 		else:
 			if not freeze:
 				var overlap = position.distance_to(body.position) - body.fruits_dict[body.fruit_type].radius - fruits_dict[fruit_type].radius

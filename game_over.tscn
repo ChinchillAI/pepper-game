@@ -45,22 +45,29 @@ script = ExtResource("1_k5lob")
 offset_right = 855.0
 offset_bottom = 480.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
 layout_mode = 2
 
-[node name="GameOverLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="GameOverLabel" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "GAME_OVER"
 label_settings = SubResource("LabelSettings_w38e0")
 horizontal_alignment = 1
 
-[node name="Score" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="Score" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_scfhw")
 horizontal_alignment = 1
 
-[node name="PressRestart" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="PressRestart" type="Label" parent="CenterContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "PRESS_TO_RESTART"
 label_settings = SubResource("LabelSettings_4c8j1")
 horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+columns = 4

@@ -6,6 +6,7 @@ signal score_changed(score)
 signal best_score_changed(score)
 signal next_fruit_changed(fruit_type)
 signal set_game_state(state)
+signal set_stats(stats)
 
 @export var buffer_top := 30. : set = _set_buffer_top
 
@@ -26,6 +27,13 @@ var last_mouse_position
 @export var max_fruit := Fruit.FruitsEnum.TOMATO
 @export var current_fruit := Fruit.FruitsEnum.CHERRY
 @export var next_fruit := Fruit.FruitsEnum.CHERRY
+
+# stats stuff
+var dropped_fruits = {}
+var made_fruits = {}
+var time_to_fruits = {}
+var start_time = 0
+
 
 func _set_buffer_top(new_top):
 	buffer_top = new_top
@@ -88,9 +96,17 @@ func _create_playfield():
 		
 		_reset_playfield()
 
+func _reset_stats():
+	start_time = Time.get_ticks_msec()
+	for fruit in Fruit.FruitsEnum:
+		dropped_fruits[fruit] = 0
+		made_fruits[fruit] = 0
+		time_to_fruits[fruit] = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_create_playfield()
+	_reset_stats()
 	_load_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -111,6 +127,11 @@ func _handle_score(points):
 	if player_score > best_score:
 		best_score = player_score
 	print("Scored points: {x}".format({"x": points}))
+
+func _handle_made(fruit_type):
+	made_fruits[Fruit.FruitsEnum.keys()[fruit_type]] += 1
+	if time_to_fruits[Fruit.FruitsEnum.keys()[fruit_type]] == 0:
+		time_to_fruits[Fruit.FruitsEnum.keys()[fruit_type]] = floor((Time.get_ticks_msec() - start_time) / 1000)
 
 # See https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html
 func _save_game():
@@ -186,17 +207,29 @@ func _input(event):
 	if not Engine.is_editor_hint():
 		if not game_over:
 			if event.is_action_pressed("drop") and can_drop:
+				
+				# cooldown for drop
 				can_drop = false
 				$DropTimer.start()
+				
+				# stats
+				dropped_fruits[Fruit.FruitsEnum.keys()[current_fruit]] += 1
+				
+				# drop the fruit
 				var dropped_fruit = load("res://fruit.tscn").instantiate()
 				dropped_fruit.position = $Player.position
 				dropped_fruit.fruit_type = current_fruit
 				dropped_fruit._create_fruit()
 				dropped_fruit.score.connect(_handle_score)
+				dropped_fruit.made.connect(_handle_made)
 				add_child(dropped_fruit)
 				$DropSoundPlayer.play()
+				
+				# setup next fruit
 				current_fruit = next_fruit
 				$Player.set_fruit(current_fruit)
+				
+				# make sure player isn't out of bounds given new radius
 				$Player.position.x = max(
 					$Player.position.x, 
 					container_thickness + $Player/Fruit.fruits_dict[$Player/Fruit.fruit_type].radius
@@ -226,6 +259,7 @@ func reset():
 		if c.is_in_group("fruits"):
 			c.queue_free()
 	_reset_playfield()
+	_reset_stats()
 	$ResetGameSoundPlayer.play()
 	game_over = false
 
@@ -237,6 +271,12 @@ func _on_area_2d_body_entered(body):
 	if body.is_in_group("fruits"):
 		if body.in_play:
 			print("lost game")
+			set_stats.emit({
+				"dropped_fruits": dropped_fruits,
+				"made_fruits": made_fruits,
+				"time_to_fruits": time_to_fruits,
+				"elapsed_time": floor((Time.get_ticks_msec() - start_time) / 1000)
+			})
 			_game_over()
 
 
