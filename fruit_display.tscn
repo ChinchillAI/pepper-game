@@ -1,12 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://3j1bvfidmog0"]
+[gd_scene load_steps=7 format=3 uid="uid://3j1bvfidmog0"]
 
 [ext_resource type="Script" path="res://fruit_display.gd" id="1_gembo"]
 [ext_resource type="PackedScene" uid="uid://co12pe0ajl0pk" path="res://fruit.tscn" id="1_ndikd"]
 [ext_resource type="Texture2D" uid="uid://dvj5dgxt8fcuv" path="res://images/bubble_transparent.png" id="3_e44m0"]
-[ext_resource type="FontFile" uid="uid://dgh3u0bnfy8g4" path="res://fonts/NotoSans-Regular.ttf" id="4_1e7ue"]
+[ext_resource type="FontFile" uid="uid://jway2q5bniar" path="res://fonts/NotoSansJP-VariableFont_wght.ttf" id="4_poy1v"]
+
+[sub_resource type="FontVariation" id="FontVariation_kdkbw"]
+base_font = ExtResource("4_poy1v")
+variation_opentype = {
+2003265652: 400
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_v635i"]
-font = ExtResource("4_1e7ue")
+font = SubResource("FontVariation_kdkbw")
 font_size = 22
 outline_size = 7
 outline_color = Color(0, 0, 0, 1)

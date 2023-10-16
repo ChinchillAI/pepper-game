@@ -1,10 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://bm6i5ujyuld01"]
+[gd_scene load_steps=6 format=3 uid="uid://bm6i5ujyuld01"]
 
 [ext_resource type="Script" path="res://options_screen.gd" id="1_yngh3"]
-[ext_resource type="FontFile" uid="uid://dgh3u0bnfy8g4" path="res://fonts/NotoSans-Regular.ttf" id="2_rkpfg"]
+[ext_resource type="FontFile" uid="uid://jway2q5bniar" path="res://fonts/NotoSansJP-VariableFont_wght.ttf" id="2_0cegf"]
+
+[sub_resource type="FontVariation" id="FontVariation_ks3hl"]
+base_font = ExtResource("2_0cegf")
+variation_opentype = {
+2003265652: 400
+}
 
 [sub_resource type="Theme" id="Theme_v3ur2"]
-default_font = ExtResource("2_rkpfg")
+default_font = SubResource("FontVariation_ks3hl")
 
 [sub_resource type="LabelSettings" id="LabelSettings_adlpo"]
 

@@ -1,25 +1,51 @@
-[gd_scene load_steps=8 format=3 uid="uid://es1orhhxtriv"]
+[gd_scene load_steps=12 format=3 uid="uid://es1orhhxtriv"]
 
 [ext_resource type="Script" path="res://score_display.gd" id="1_yrh1n"]
 [ext_resource type="Texture2D" uid="uid://dvj5dgxt8fcuv" path="res://images/bubble_transparent.png" id="2_qc1bo"]
-[ext_resource type="FontFile" uid="uid://dgh3u0bnfy8g4" path="res://fonts/NotoSans-Regular.ttf" id="3_p00nq"]
+[ext_resource type="FontFile" uid="uid://jway2q5bniar" path="res://fonts/NotoSansJP-VariableFont_wght.ttf" id="4_xevy1"]
+
+[sub_resource type="FontVariation" id="FontVariation_jy4ti"]
+base_font = ExtResource("4_xevy1")
+variation_opentype = {
+2003265652: 400
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_46yl2"]
 line_spacing = 0.0
-font = ExtResource("3_p00nq")
+font = SubResource("FontVariation_jy4ti")
 font_size = 28
 outline_size = 7
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="FontVariation" id="FontVariation_2tyy1"]
+base_font = ExtResource("4_xevy1")
+variation_opentype = {
+2003265652: 400
+}
+
 [sub_resource type="LabelSettings" id="LabelSettings_0cv4t"]
 line_spacing = 0.0
+font = SubResource("FontVariation_2tyy1")
 font_size = 12
+
+[sub_resource type="FontVariation" id="FontVariation_pdh0o"]
+base_font = ExtResource("4_xevy1")
+variation_opentype = {
+2003265652: 400
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_njwac"]
 line_spacing = 0.0
+font = SubResource("FontVariation_pdh0o")
+
+[sub_resource type="FontVariation" id="FontVariation_m61sm"]
+base_font = ExtResource("4_xevy1")
+variation_opentype = {
+2003265652: 400
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_7wotp"]
-font = ExtResource("3_p00nq")
+font = SubResource("FontVariation_m61sm")
 font_size = 28
 outline_size = 7
 outline_color = Color(0, 0, 0, 1)

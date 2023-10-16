@@ -1,18 +1,40 @@
-[gd_scene load_steps=5 format=3 uid="uid://cov7ipnemtxng"]
+[gd_scene load_steps=9 format=3 uid="uid://cov7ipnemtxng"]
 
 [ext_resource type="Script" path="res://game_over.gd" id="1_k5lob"]
+[ext_resource type="FontFile" uid="uid://jway2q5bniar" path="res://fonts/NotoSansJP-VariableFont_wght.ttf" id="2_cueap"]
+
+[sub_resource type="FontVariation" id="FontVariation_ittve"]
+base_font = ExtResource("2_cueap")
+variation_opentype = {
+2003265652: 400
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_w38e0"]
+font = SubResource("FontVariation_ittve")
 font_size = 52
 outline_size = 14
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="FontVariation" id="FontVariation_lybu2"]
+base_font = ExtResource("2_cueap")
+variation_opentype = {
+2003265652: 400
+}
+
 [sub_resource type="LabelSettings" id="LabelSettings_scfhw"]
+font = SubResource("FontVariation_lybu2")
 font_size = 24
 outline_size = 9
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="FontVariation" id="FontVariation_86vi0"]
+base_font = ExtResource("2_cueap")
+variation_opentype = {
+2003265652: 400
+}
+
 [sub_resource type="LabelSettings" id="LabelSettings_4c8j1"]
+font = SubResource("FontVariation_86vi0")
 outline_size = 9
 outline_color = Color(0, 0, 0, 1)
 

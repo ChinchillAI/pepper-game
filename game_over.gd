@@ -12,7 +12,7 @@ func _process(_delta):
 
 
 func _on_playfield_score_changed(score):
-	$CenterContainer/VBoxContainer/Score.text = "Score: " + str(score) # Replace with function body.
+	$CenterContainer/VBoxContainer/Score.text = tr("SCORE") + ":%s" % score 
 
 
 func _on_game_state_changed(state):

@@ -1,11 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfa66t1nbt6xl"]
+[gd_scene load_steps=5 format=3 uid="uid://bfa66t1nbt6xl"]
 
 [ext_resource type="Script" path="res://fruit_legend.gd" id="1_f3jkv"]
-[ext_resource type="FontFile" uid="uid://dgh3u0bnfy8g4" path="res://fonts/NotoSans-Regular.ttf" id="2_xqgey"]
+[ext_resource type="FontFile" uid="uid://jway2q5bniar" path="res://fonts/NotoSansJP-VariableFont_wght.ttf" id="2_om4ej"]
+
+[sub_resource type="FontVariation" id="FontVariation_no05i"]
+base_font = ExtResource("2_om4ej")
+variation_opentype = {
+2003265652: 400
+}
 
 [sub_resource type="LabelSettings" id="LabelSettings_wsyft"]
 line_spacing = 0.0
-font = ExtResource("2_xqgey")
+font = SubResource("FontVariation_no05i")
 font_size = 22
 outline_size = 7
 outline_color = Color(0, 0, 0, 1)
