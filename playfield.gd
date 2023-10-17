@@ -101,7 +101,7 @@ func _reset_stats():
 	for fruit in Fruit.FruitsEnum:
 		dropped_fruits[fruit] = 0
 		made_fruits[fruit] = 0
-		time_to_fruits[fruit] = 0
+		time_to_fruits[fruit] = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -130,7 +130,7 @@ func _handle_score(points):
 
 func _handle_made(fruit_type):
 	made_fruits[Fruit.FruitsEnum.keys()[fruit_type]] += 1
-	if time_to_fruits[Fruit.FruitsEnum.keys()[fruit_type]] == 0:
+	if time_to_fruits[Fruit.FruitsEnum.keys()[fruit_type]] == -1:
 		time_to_fruits[Fruit.FruitsEnum.keys()[fruit_type]] = floor((Time.get_ticks_msec() - start_time) / 1000)
 
 # See https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html
@@ -222,6 +222,8 @@ func _input(event):
 				dropped_fruit._create_fruit()
 				dropped_fruit.score.connect(_handle_score)
 				dropped_fruit.made.connect(_handle_made)
+				if time_to_fruits[Fruit.FruitsEnum.keys()[current_fruit]] == -1:
+					time_to_fruits[Fruit.FruitsEnum.keys()[current_fruit]] = floor((Time.get_ticks_msec() - start_time) / 1000)
 				add_child(dropped_fruit)
 				$DropSoundPlayer.play()
 				
@@ -245,6 +247,8 @@ func _input(event):
 				set_game_state.emit(Game.States.PAUSED)
 	if event.is_action_pressed("reset"):
 		reset()
+	if event.is_action_pressed("debug_game_over"):
+		_game_over()
 
 func _game_over():
 	game_over = true
@@ -254,6 +258,14 @@ func _game_over():
 			c.freeze_fruit()
 	_save_game() 
 			
+func _calc_area():
+	var max_area = container_height * container_width
+	var used_area = 0
+	for c in get_children():
+		if c.is_in_group("fruits"):
+			used_area += PI * pow(c.fruits_dict[c.fruit_type]["radius"],2)
+	return used_area / max_area
+
 func reset():
 	for c in get_children():
 		if c.is_in_group("fruits"):
@@ -275,7 +287,9 @@ func _on_area_2d_body_entered(body):
 				"dropped_fruits": dropped_fruits,
 				"made_fruits": made_fruits,
 				"time_to_fruits": time_to_fruits,
-				"elapsed_time": floor((Time.get_ticks_msec() - start_time) / 1000)
+				"elapsed_time": floor((Time.get_ticks_msec() - start_time) / 1000),
+				"score": player_score,
+				"playfield_coverage": _calc_area()
 			})
 			_game_over()
 

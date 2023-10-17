@@ -16,8 +16,8 @@ script = ExtResource("1_4rfcx")
 [node name="Playfield" parent="." instance=ExtResource("1_qufcv")]
 position = Vector2(267, 28)
 container_height = 340.0
-current_fruit = 2
-next_fruit = 1
+current_fruit = 1
+next_fruit = 2
 
 [node name="ScoreDisplay" parent="." instance=ExtResource("2_mqihc")]
 position = Vector2(134, 105)
@@ -55,15 +55,15 @@ bus = &"Music"
 [connection signal="set_game_state" from="Playfield" to="." method="_on_set_game_state"]
 [connection signal="set_stats" from="Playfield" to="GameOver" method="_on_playfield_set_stats"]
 [connection signal="body_entered" from="FruitLegend/Fruit" to="FruitLegend/Fruit" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@273998" to="FruitLegend/@RigidBody2D@273998" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@273999" to="FruitLegend/@RigidBody2D@273999" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@274000" to="FruitLegend/@RigidBody2D@274000" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@274001" to="FruitLegend/@RigidBody2D@274001" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@274002" to="FruitLegend/@RigidBody2D@274002" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@274003" to="FruitLegend/@RigidBody2D@274003" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@274004" to="FruitLegend/@RigidBody2D@274004" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@274005" to="FruitLegend/@RigidBody2D@274005" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@274006" to="FruitLegend/@RigidBody2D@274006" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@274007" to="FruitLegend/@RigidBody2D@274007" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@76031" to="FruitLegend/@RigidBody2D@76031" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@76032" to="FruitLegend/@RigidBody2D@76032" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@76033" to="FruitLegend/@RigidBody2D@76033" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@76034" to="FruitLegend/@RigidBody2D@76034" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@76035" to="FruitLegend/@RigidBody2D@76035" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@76036" to="FruitLegend/@RigidBody2D@76036" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@76037" to="FruitLegend/@RigidBody2D@76037" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@76038" to="FruitLegend/@RigidBody2D@76038" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@76039" to="FruitLegend/@RigidBody2D@76039" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@76040" to="FruitLegend/@RigidBody2D@76040" method="_on_body_entered" flags=18]
 [connection signal="request_save" from="OptionsScreen" to="Playfield" method="_on_options_screen_request_save"]
 [connection signal="set_game_state" from="OptionsScreen" to="." method="_on_set_game_state"]
