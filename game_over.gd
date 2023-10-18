@@ -32,10 +32,15 @@ func _on_game_state_changed(state):
 	else:
 		visible = false # Replace with function body.
 		$GPUParticles2D.emitting = false
-		$GPUParticles2D.restart()
+		
 		$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer.custom_minimum_size = Vector2(855.,0.)
 		$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2.custom_minimum_size = Vector2(855.,0.)
 
+func format_time(seconds):
+	var hours = "" if seconds < 3600 else "%s:" % (seconds / 3600)
+	var minutes = "00:" if seconds < 60 else "%02d:" % ((seconds % 3600) / 60)
+	var sec = "%02d" % (seconds % 60)
+	return hours + minutes + sec
 
 func _on_playfield_set_stats(new_stats):
 	stats = new_stats
@@ -44,7 +49,7 @@ func _on_playfield_set_stats(new_stats):
 		c.free()
 	
 	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/Score.text = "%s" % stats["score"] 
-	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/Time.text = "%s" % stats["elapsed_time"]
+	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/Time.text = format_time(stats["elapsed_time"])
 	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/Coverage.text = "%.1f%%" % (stats["playfield_coverage"] * 100)
 	
 	var best_fruit = Fruit.FruitsEnum.CHERRY
@@ -73,5 +78,5 @@ func _on_playfield_set_stats(new_stats):
 			made_label.text = "%s" % stats["made_fruits"][fruit_type]
 			$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer.add_child(made_label)
 			var time_label = Label.new()
-			time_label.text = "%s" % stats["time_to_fruits"][fruit_type]
+			time_label.text = format_time(stats["time_to_fruits"][fruit_type])
 			$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer.add_child(time_label)
