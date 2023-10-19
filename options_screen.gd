@@ -26,9 +26,9 @@ var sfx_id : int
 func _ready():
 	visible = false
 	
-	unselected_style = LabelSettings.new()
+	unselected_style = load("res://standard_font.tres")
 	
-	selected_style = LabelSettings.new()
+	selected_style = load("res://standard_font.tres").duplicate()
 	selected_style.font_color = Color.YELLOW
 	
 	options_labels = {

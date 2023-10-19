@@ -1,0 +1,14 @@
+[gd_resource type="LabelSettings" load_steps=3 format=3 uid="uid://bjh2hklnobn5p"]
+
+[ext_resource type="FontFile" uid="uid://jway2q5bniar" path="res://fonts/NotoSansJP-VariableFont_wght.ttf" id="1_5wki0"]
+
+[sub_resource type="FontVariation" id="FontVariation_86vi0"]
+base_font = ExtResource("1_5wki0")
+variation_opentype = {
+2003265652: 400
+}
+
+[resource]
+font = SubResource("FontVariation_86vi0")
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)

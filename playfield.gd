@@ -248,7 +248,8 @@ func _input(event):
 	if event.is_action_pressed("reset"):
 		reset()
 	if event.is_action_pressed("debug_game_over"):
-		_game_over()
+		#_game_over()
+		pass
 
 func _game_over():
 	game_over = true

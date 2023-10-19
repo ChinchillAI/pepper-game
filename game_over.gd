@@ -59,6 +59,8 @@ func _on_playfield_set_stats(new_stats):
 				best_fruit = Fruit.FruitsEnum[fruit_type]
 	$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer/Control/Fruit.fruit_type = best_fruit
 	
+	
+	var label_settings = load("res://standard_font.tres")
 	for fruit_type in Fruit.FruitsEnum:
 		if stats["dropped_fruits"][fruit_type] > 0 or stats["made_fruits"][fruit_type] > 0 or stats["time_to_fruits"][fruit_type] >= 0:
 			var icon_control = Control.new()
@@ -68,15 +70,20 @@ func _on_playfield_set_stats(new_stats):
 			fruit.fruit_type = Fruit.FruitsEnum[fruit_type]
 			fruit.display_size = Fruit.SizesEnum.LEGEND
 			fruit.freeze = true
+			fruit.collision_mask = 0
+			fruit.collision_layer = 0
 			icon_control.add_child(fruit)
 			# this next line generates a shit ton of errors but still seems to work
 			$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer.add_child(icon_control)
 			var dropped_label = Label.new()
+			dropped_label.label_settings = label_settings
 			dropped_label.text = "%s" % stats["dropped_fruits"][fruit_type]
 			$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer.add_child(dropped_label)
 			var made_label = Label.new()
+			made_label.label_settings = label_settings
 			made_label.text = "%s" % stats["made_fruits"][fruit_type]
 			$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer.add_child(made_label)
 			var time_label = Label.new()
+			time_label.label_settings = label_settings
 			time_label.text = format_time(stats["time_to_fruits"][fruit_type])
 			$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2/GridContainer.add_child(time_label)

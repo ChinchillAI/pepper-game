@@ -12,7 +12,8 @@
 script = ExtResource("1_oyge5")
 container_height = 300.0
 best_score = 6836
-current_fruit = 2
+current_fruit = 1
+next_fruit = 3
 
 [node name="Container" parent="." instance=ExtResource("1_a5hla")]
 position = Vector2(0, 78)

@@ -2,7 +2,7 @@ keys,en,ja,es,pt
 MUSIC,Music,音楽,Música,Música
 SFX,Effects,効果音,Efectos,Efeitos
 MASTER,Master,主音量,Maestro,Principal
-RETURN_TO_TITLE,Return to Title,タイトルに戻る,Volver al Título,Retornar ao Título
+RETURN_TO_TITLE,Return to Game,試合に戻る,Volver al Juego,Retornar ao Jogo
 LANGUAGE,Language,言語,Idioma,Idioma
 LANGUAGE_NAME,English,日本語,Español,Português
 PEPPER_GAME,Pepper Game,ペッパーゲーム,Juego de la Pimienta,Jogo da Pimenta
@@ -11,7 +11,7 @@ OPTIONS,Options,オプション,Opciones,Opções
 CREDITS,Credits,クレジット,Créditos,Créditos
 HIGH_SCORE,Best Score,ベストスコア,Mejor Puntuación,Melhor Pontuação
 GAME_OVER,Game Over,ゲームオーバー,Fin del Juego,Fim do Jogo
-PRESS_TO_RESTART,Press 'R' to Restart,「R」を押して再起動する,Pulse 'R' para Reiniciar,Pressione 'R' para Reiniciar
+PRESS_TO_RESTART,Press [R] to Restart,「R」を押して再起動する,Pulse [R] para Reiniciar,Pressione [R] para Reiniciar
 SCORE,Score,スコア,Puntuación,Pontuação
 NEXT,Next,ネクスト,Siguiente,Próximo
 MUTED,Muted,ミュート,Silenciar,Mudo
@@ -24,3 +24,5 @@ NEW_HIGH_SCORE,New High Score!,新たなハイスコア,¡Nueva puntuación máx
 SUMMARY,Summary,概要,Resumen,Resumo
 DROPPED,Dropped,落選,Se ha caído,Derrubado
 MADE,Made,メイド,Hecho,Fabricado
+CONTROLS,[⇦][⇨] or [Mouse] to move | [Spacebar] or [Left Click] to drop | [Esc] for Options,[⇦][⇨] または [マウス] 移動する | [スペースバー] または [左クリック] ドロップする | [Esc] オプション,[⇦][⇨] o [Ratón] mover | [Espaciadora] o [clic izquierdo] dejar caer | [Esc] para opciones,[⇦][⇨] ou [Rato] para se deslocar | [Barra de Espaço] ou [Clique Esquerdo] para cair | [Esc] para opções
+OPTIONS_CONTROLS,[⇧][⇩] to move | [⇦][⇨] to adjust | [Enter] to select,[⇧][⇩] 移動する | [⇦][⇨] 調整する | [Enter] を選択します,[⇧][⇩] mover | [⇦][⇨] para ajustar | [Enter] para seleccionar,[⇧][⇩] para se deslocar | [⇦][⇨] para ajustar | [Enter] para selecionar

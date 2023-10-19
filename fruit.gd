@@ -46,57 +46,57 @@ var fruits_dict = {
 	FruitsEnum.CHERRY:     { 
 		"radius": 20./480./2.*screen_height,  
 		"color": Color.DARK_RED,
-		"texture": _create_texture("res://images/month_new.png")
+		"texture": _create_texture("res://images/month_new_vector.png")
 	},
 	FruitsEnum.STRAWBERRY: { 
 		"radius": 30./480./2.*screen_height,  
 		"color": Color.INDIAN_RED,
-		"texture": _create_texture("res://images/month_1.png")
+		"texture": _create_texture("res://images/month_1_vector.png")
 	},
 	FruitsEnum.GRAPE:      { 
 		"radius": 40./480./2.*screen_height,  
 		"color": Color.PURPLE,
-		"texture": _create_texture("res://images/month_2.png")
+		"texture": _create_texture("res://images/month_2_vector.png")
 	},
 	FruitsEnum.ORANGE:     { 
 		"radius": 45./480./2.*screen_height,  
 		"color": Color.ORANGE,
-		"texture": _create_texture("res://images/month_6.png")
+		"texture": _create_texture("res://images/month_6_vector.png")
 	},
 	FruitsEnum.TOMATO:     { 
 		"radius": 60./480./2.*screen_height,  
 		"color": Color.ORANGE_RED,
-		"texture": _create_texture("res://images/month_12.png")
+		"texture": _create_texture("res://images/month_12_vector.png")
 	},
 	FruitsEnum.APPLE:      { 
 		"radius": 75./480./2.*screen_height,  
 		"color": Color.RED,
-		"texture": _create_texture("res://images/month_24.png")
+		"texture": _create_texture("res://images/month_24_vector.png")
 	},
 	FruitsEnum.CANTELOPE:  { 
 		"radius": 85./480./2.*screen_height,  
 		"color": Color.YELLOW,
-		"texture": _create_texture("res://images/month_36.png")
+		"texture": _create_texture("res://images/month_36_vector.png")
 	},
 	FruitsEnum.PEACH:      { 
 		"radius": 105./480./2.*screen_height,  
 		"color": Color.PINK,
-		"texture": _create_texture("res://images/month_48.png")
+		"texture": _create_texture("res://images/month_48_vector.png")
 	},
 	FruitsEnum.PINEAPPLE:  { 
 		"radius": 120./480./2.*screen_height,  
 		"color": Color.GOLD,
-		"texture": _create_texture("res://images/red_pepper.png")
+		"texture": _create_texture("res://images/red_pepper_vector.png")
 	},
 	FruitsEnum.MELON:      { 
 		"radius": 145./480./2.*screen_height, 
 		"color": Color.GREEN_YELLOW,
-		"texture": _create_texture("res://images/yellow_pepper.png")
+		"texture": _create_texture("res://images/yellow_pepper_vector.png")
 	},
 	FruitsEnum.WATERMELON: { 
 		"radius": 160./480./2.*screen_height, 
 		"color": Color.GREEN,
-		"texture": _create_texture("res://images/green_pepper.png")
+		"texture": _create_texture("res://images/green_pepper_vector.png")
 	},
 }
 
@@ -134,7 +134,10 @@ func _create_fruit():
 	
 	if get_node_or_null("CollisionShape2D") and get_node_or_null("Polygon2D") and get_node_or_null("Sprite2D"):
 		$CollisionShape2D.shape = new_collidor
-		$Polygon2D.polygon = debug_polygon
+		if false:
+			$Polygon2D.polygon = debug_polygon
+		else:
+			$Polygon2D.visible = false
 		$Polygon2D.color = fruits_dict[fruit_type].color
 		$Sprite2D.texture = fruits_dict[fruit_type].texture
 		$Sprite2D.texture.set_size_override(Vector2(fruit_radius*2, fruit_radius*2))
