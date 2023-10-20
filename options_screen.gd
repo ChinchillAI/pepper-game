@@ -18,7 +18,7 @@ enum Options {
 	TITLE
 }
 
-var selected_option := Options.SFX
+var selected_option := Options.NATSUMI
 var selected_style : LabelSettings
 var unselected_style : LabelSettings
 
@@ -39,7 +39,7 @@ func _ready():
 	selected_style.font_color = Color.YELLOW
 	
 	options_labels = {
-		Options.NATSUMI: $CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Natsumi,
+		Options.NATSUMI: $CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/Natsumi,
 		Options.SFX: $CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/SFX,
 		Options.MUSIC: $CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/Music,
 		Options.MASTER: $CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/Master,
