@@ -33,8 +33,6 @@ angular_velocity_min = 120.0
 angular_velocity_max = 195.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-scale_min = 2.0
-scale_max = 2.5
 color_initial_ramp = SubResource("GradientTexture1D_tindr")
 turbulence_noise_strength = 8.08
 turbulence_noise_speed = Vector3(5, 5, 0)
@@ -254,6 +252,7 @@ bus = &"SFX"
 [node name="NatsumiGamePlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_7bw6p")
 volume_db = -10.214
+bus = &"Natsumi"
 
 [node name="NatsumiTrapPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_1j4nq")

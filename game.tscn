@@ -22,9 +22,8 @@ centered = false
 [node name="Playfield" parent="." instance=ExtResource("1_qufcv")]
 position = Vector2(267, 14)
 container_height = 340.0
-best_score = 2780
-current_fruit = 0
-next_fruit = 3
+best_score = 15
+next_fruit = 2
 
 [node name="ScoreDisplay" parent="." instance=ExtResource("2_mqihc")]
 position = Vector2(134, 105)
@@ -68,16 +67,16 @@ horizontal_alignment = 1
 [connection signal="set_game_state" from="Playfield" to="." method="_on_set_game_state"]
 [connection signal="set_stats" from="Playfield" to="GameOver" method="_on_playfield_set_stats"]
 [connection signal="body_entered" from="FruitLegend/Fruit" to="FruitLegend/Fruit" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@54467" to="FruitLegend/@RigidBody2D@54467" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@54468" to="FruitLegend/@RigidBody2D@54468" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@54469" to="FruitLegend/@RigidBody2D@54469" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@54470" to="FruitLegend/@RigidBody2D@54470" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@54471" to="FruitLegend/@RigidBody2D@54471" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@54472" to="FruitLegend/@RigidBody2D@54472" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@54473" to="FruitLegend/@RigidBody2D@54473" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@54474" to="FruitLegend/@RigidBody2D@54474" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@54475" to="FruitLegend/@RigidBody2D@54475" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="FruitLegend/@RigidBody2D@54476" to="FruitLegend/@RigidBody2D@54476" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@73267" to="FruitLegend/@RigidBody2D@73267" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@73268" to="FruitLegend/@RigidBody2D@73268" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@73269" to="FruitLegend/@RigidBody2D@73269" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@73270" to="FruitLegend/@RigidBody2D@73270" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@73271" to="FruitLegend/@RigidBody2D@73271" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@73272" to="FruitLegend/@RigidBody2D@73272" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@73273" to="FruitLegend/@RigidBody2D@73273" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@73274" to="FruitLegend/@RigidBody2D@73274" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@73275" to="FruitLegend/@RigidBody2D@73275" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="FruitLegend/@RigidBody2D@73276" to="FruitLegend/@RigidBody2D@73276" method="_on_body_entered" flags=18]
 [connection signal="request_clear_data" from="OptionsScreen" to="Playfield" method="_on_options_screen_request_clear_data"]
 [connection signal="request_save" from="OptionsScreen" to="Playfield" method="_on_options_screen_request_save"]
 [connection signal="set_debug" from="OptionsScreen" to="." method="_on_options_screen_set_debug"]
