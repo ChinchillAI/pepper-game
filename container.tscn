@@ -9,4 +9,5 @@ script = ExtResource("1_wi54y")
 polygon = PackedVector2Array(0, 0, 10, 0, 10, 755, 680, 755, 680, 0, 690, 0, 690, 765, 0, 765)
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(0, 0, 10, 0, 10, 755, 680, 755, 680, 0, 690, 0, 690, 765, 0, 765)

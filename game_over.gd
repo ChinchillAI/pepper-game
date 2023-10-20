@@ -22,15 +22,30 @@ func _on_playfield_score_changed(score):
 func _on_game_state_changed(state):
 	if state == Game.States.GAMEOVER:
 		visible = true
-		$GPUParticles2D.emitting = true
-		$GPUParticles2D2.emitting = true
-		$GPUParticles2D3.emitting = true
-		var tween = get_tree().create_tween()
-		
+		if stats["score"] > stats["best_score"]: # high score
+			$ConfettiSoundPlayer.play()
+			$NatsumiLFGPlayer.play()
+			$ApplausePlayer.play()
+			$GPUParticles2D.emitting = true
+			$GPUParticles2D2.emitting = true # these should be reset by one shot
+			$GPUParticles2D3.emitting = true
+		else:
+			if stats["playfield_coverage"] < .20:
+				if randf() > .5:
+					$NatsumiTrapPlayer.play()
+				else:
+					$NatsumiGamePlayer.play()
+			elif stats["playfield_coverage"] < .50:
+				$NatsumiYikesPlayer.play()
+			else:
+				$NatsumiOhPlayer.play()
+			
+		var tween = get_tree().create_tween()	
 		tween.tween_property($CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer, "custom_minimum_size", Vector2(0.,0.), 0.5)
 		tween.parallel().tween_property($CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2, "custom_minimum_size", Vector2(0.,0.), 0.5)
 	else:
 		visible = false # Replace with function body.
+		$GPUParticles2D.restart()
 		$GPUParticles2D.emitting = false
 		
 		$CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer.custom_minimum_size = Vector2(855.,0.)

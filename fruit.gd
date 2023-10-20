@@ -31,6 +31,7 @@ var polygon_points := 32
 
 var in_play := false
 var freeze_me := false
+var debug_enabled := false # this will be set by function
 
 func _create_texture(path):
 	#var image = Image.load_from_file(path)
@@ -134,10 +135,8 @@ func _create_fruit():
 	
 	if get_node_or_null("CollisionShape2D") and get_node_or_null("Polygon2D") and get_node_or_null("Sprite2D"):
 		$CollisionShape2D.shape = new_collidor
-		if false:
-			$Polygon2D.polygon = debug_polygon
-		else:
-			$Polygon2D.visible = false
+		$Polygon2D.polygon = debug_polygon
+		$Polygon2D.visible = debug_enabled
 		$Polygon2D.color = fruits_dict[fruit_type].color
 		$Sprite2D.texture = fruits_dict[fruit_type].texture
 		$Sprite2D.texture.set_size_override(Vector2(fruit_radius*2, fruit_radius*2))
@@ -161,6 +160,10 @@ func _physics_process(_delta):
 	else:
 		for body in get_colliding_bodies():
 			_on_body_entered(body)
+
+func _on_debug_changed(new_debug):
+	debug_enabled = new_debug
+	$Polygon2D.visible = debug_enabled
 
 func _on_body_entered(body):
 	if body.is_in_group("fruits"):

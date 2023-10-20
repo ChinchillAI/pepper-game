@@ -26,3 +26,8 @@ DROPPED,Dropped,落選,Se ha caído,Derrubado
 MADE,Made,メイド,Hecho,Fabricado
 CONTROLS,[⇦][⇨] or [Mouse] to move | [Spacebar] or [Left Click] to drop | [Esc] for Options,[⇦][⇨] または [マウス] 移動する | [スペースバー] または [左クリック] ドロップする | [Esc] オプション,[⇦][⇨] o [Ratón] mover | [Espaciadora] o [clic izquierdo] dejar caer | [Esc] para opciones,[⇦][⇨] ou [Rato] para se deslocar | [Barra de Espaço] ou [Clique Esquerdo] para cair | [Esc] para opções
 OPTIONS_CONTROLS,[⇧][⇩] to move | [⇦][⇨] to adjust | [Enter] to select,[⇧][⇩] 移動する | [⇦][⇨] 調整する | [Enter] を選択します,[⇧][⇩] mover | [⇦][⇨] para ajustar | [Enter] para seleccionar,[⇧][⇩] para se deslocar | [⇦][⇨] para ajustar | [Enter] para selecionar
+DEBUG,Debug,デバッグ,Depurar,Depurar
+CLEAR_DATA,Erase Game Data,ゲームデータの消去,Borrar datos del juego,Apagar dados do jogo
+ENABLED,Enabled,有効,Activado,Ativado
+DISABLED,Disabled,無効,Desactivado,Desativado
+NATSUMI,Natsumi,なつみ,Natsumi,Natsumi

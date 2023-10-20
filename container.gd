@@ -31,10 +31,8 @@ func _create_container():
 	
 	if is_instance_valid($CollisionPolygon2D) and is_instance_valid($Polygon2D):
 		$CollisionPolygon2D.polygon = new_container
-		if false:
-			$Polygon2D.polygon = new_container
-		else:
-			$Polygon2D.visible = false
+		$Polygon2D.polygon = new_container
+		$Polygon2D.visible = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -44,3 +42,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+	
+func _on_debug_changed(new_debug):
+	$Polygon2D.visible = new_debug

@@ -2,6 +2,7 @@ extends Node2D
 class_name Game
 
 signal state_changed(state)
+signal debug_changed(debug_enabled)
 
 enum States {
 	TITLE_SCREEN,
@@ -13,6 +14,7 @@ enum States {
 }
 
 var state := States.TITLE_SCREEN : set = _on_set_game_state
+var debug_enabled := false : set = _on_set_debug_enabled
 
 # Called when the node enters the scene tree for the first time.
 func _bob(node):
@@ -42,7 +44,15 @@ func _ready():
 func _process(_delta):
 	pass
 
+func _on_set_debug_enabled(new_debug):
+	debug_enabled = new_debug
+	debug_changed.emit(debug_enabled)
 
 func _on_set_game_state(new_state):
 	state = new_state
+	$Label.visible = true if new_state == Game.States.PLAYING else false
 	state_changed.emit(state)
+
+
+func _on_options_screen_set_debug(new_debug):
+	debug_enabled = new_debug

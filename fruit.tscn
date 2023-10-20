@@ -5,9 +5,9 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a4g3n"]
 friction = 0.25
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_oqlrl"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_yx2ut"]
 
-[sub_resource type="ImageTexture" id="ImageTexture_l6c5r"]
+[sub_resource type="ImageTexture" id="ImageTexture_ouweb"]
 
 [node name="Fruit" type="RigidBody2D" groups=["fruits"]]
 mass = 100.0
@@ -18,7 +18,7 @@ can_sleep = false
 script = ExtResource("1_h64qe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_oqlrl")
+shape = SubResource("CircleShape2D_yx2ut")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 visible = false
@@ -26,6 +26,6 @@ color = Color(0.545098, 0, 0, 1)
 polygon = PackedVector2Array(10, 0, 9.80785, 1.9509, 9.2388, 3.82683, 8.3147, 5.5557, 7.07107, 7.07107, 5.5557, 8.3147, 3.82683, 9.2388, 1.9509, 9.80785, 6.12323e-16, 10, -1.9509, 9.80785, -3.82683, 9.2388, -5.5557, 8.3147, -7.07107, 7.07107, -8.3147, 5.5557, -9.2388, 3.82683, -9.80785, 1.9509, -10, 1.22465e-15, -9.80785, -1.9509, -9.2388, -3.82683, -8.3147, -5.5557, -7.07107, -7.07107, -5.5557, -8.3147, -3.82683, -9.2388, -1.9509, -9.80785, -1.83697e-15, -10, 1.9509, -9.80785, 3.82683, -9.2388, 5.5557, -8.3147, 7.07107, -7.07107, 8.3147, -5.5557, 9.2388, -3.82683, 9.80785, -1.9509)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("ImageTexture_l6c5r")
+texture = SubResource("ImageTexture_ouweb")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

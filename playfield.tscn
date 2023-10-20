@@ -1,17 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://cwy3c8ba23xnq"]
+[gd_scene load_steps=10 format=3 uid="uid://cwy3c8ba23xnq"]
 
 [ext_resource type="PackedScene" uid="uid://crm7e1iuliqup" path="res://container.tscn" id="1_a5hla"]
 [ext_resource type="Script" path="res://playfield.gd" id="1_oyge5"]
 [ext_resource type="PackedScene" uid="uid://bu8l46p2gg14v" path="res://player.tscn" id="2_bckd3"]
 [ext_resource type="AudioStream" uid="uid://d0657ypkf4snw" path="res://sounds/drop.wav" id="4_rwn3w"]
 [ext_resource type="AudioStream" uid="uid://b3m5ys0a1bpre" path="res://sounds/merge.wav" id="5_l0b8j"]
-[ext_resource type="AudioStream" uid="uid://cwnur6da3k7wl" path="res://sounds/oh-1.wav" id="6_jvvq0"]
 [ext_resource type="AudioStream" uid="uid://ddpokmq5u2fsu" path="res://sounds/yume-ka.wav" id="7_jegqb"]
+[ext_resource type="AudioStream" uid="uid://dv007yvlqnygx" path="res://sounds/yabai.wav" id="7_rwhvv"]
+[ext_resource type="AudioStream" uid="uid://d2s3qc8gckyap" path="res://sounds/grunt-1.wav" id="8_bjegy"]
+[ext_resource type="AudioStream" uid="uid://wpdnwuay3i1c" path="res://sounds/grunt-2.wav" id="9_nx45p"]
 
 [node name="Playfield" type="Node2D"]
 script = ExtResource("1_oyge5")
 container_height = 300.0
-best_score = 6836
+best_score = 22
 current_fruit = 1
 next_fruit = 3
 
@@ -40,13 +42,23 @@ stream = ExtResource("5_l0b8j")
 max_polyphony = 4
 bus = &"SFX"
 
-[node name="GameOverSoundPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_jvvq0")
-bus = &"SFX"
-
 [node name="ResetGameSoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_jegqb")
-volume_db = 7.496
+volume_db = 12.138
+
+[node name="NatsumiDangerPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_rwhvv")
+volume_db = -10.215
+bus = &"Natsumi"
+
+[node name="NatsumiGrunt1Player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_bjegy")
+bus = &"Natsumi"
+
+[node name="NatsumiGrunt2Player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_nx45p")
+volume_db = -2.786
+bus = &"Natsumi"
 
 [node name="DropTimer" type="Timer" parent="."]
 wait_time = 0.25

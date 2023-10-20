@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bm6i5ujyuld01"]
+[gd_scene load_steps=8 format=3 uid="uid://bm6i5ujyuld01"]
 
 [ext_resource type="Script" path="res://options_screen.gd" id="1_yngh3"]
 [ext_resource type="FontFile" uid="uid://jway2q5bniar" path="res://fonts/NotoSansJP-VariableFont_wght.ttf" id="2_0cegf"]
 [ext_resource type="LabelSettings" uid="uid://bjh2hklnobn5p" path="res://standard_font.tres" id="2_bxhtj"]
+[ext_resource type="AudioStream" uid="uid://cwnur6da3k7wl" path="res://sounds/oh-1.wav" id="4_2in5v"]
+[ext_resource type="AudioStream" uid="uid://b3m5ys0a1bpre" path="res://sounds/merge.wav" id="5_srsy1"]
 
 [sub_resource type="FontVariation" id="FontVariation_ks3hl"]
 base_font = ExtResource("2_0cegf")
@@ -17,8 +19,9 @@ default_font = SubResource("FontVariation_ks3hl")
 script = ExtResource("1_yngh3")
 
 [node name="Label" type="Label" parent="."]
+offset_top = 450.0
 offset_right = 855.0
-offset_bottom = 27.0
+offset_bottom = 477.0
 text = "OPTIONS_CONTROLS"
 label_settings = ExtResource("2_bxhtj")
 horizontal_alignment = 1
@@ -36,6 +39,11 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+
+[node name="Natsumi" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "NATSUMI"
+label_settings = ExtResource("2_bxhtj")
 
 [node name="SFX" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
@@ -57,9 +65,19 @@ layout_mode = 2
 text = "LANGUAGE"
 label_settings = ExtResource("2_bxhtj")
 
+[node name="Debug" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "DEBUG"
+label_settings = ExtResource("2_bxhtj")
+
 [node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Natsumi" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+label_settings = ExtResource("2_bxhtj")
+horizontal_alignment = 2
 
 [node name="SFX" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -88,8 +106,29 @@ text = "LANGUAGE_NAME"
 label_settings = ExtResource("2_bxhtj")
 horizontal_alignment = 2
 
+[node name="Debug" type="Label" parent="CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+label_settings = ExtResource("2_bxhtj")
+horizontal_alignment = 2
+
+[node name="ClearData" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "CLEAR_DATA"
+label_settings = ExtResource("2_bxhtj")
+horizontal_alignment = 1
+
 [node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "RETURN_TO_TITLE"
 label_settings = ExtResource("2_bxhtj")
 horizontal_alignment = 1
+
+[node name="NatsumiOhPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_2in5v")
+max_polyphony = 4
+bus = &"Natsumi"
+
+[node name="MergeSoundPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_srsy1")
+max_polyphony = 4
+bus = &"SFX"

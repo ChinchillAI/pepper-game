@@ -45,6 +45,9 @@ func _create_dropper():
 
 func set_fruit(fruit_type):
 	$Fruit.fruit_type = fruit_type
+	
+func _on_debug_changed(new_debug):
+	$Fruit._on_debug_changed(new_debug)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

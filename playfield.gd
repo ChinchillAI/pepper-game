@@ -28,6 +28,10 @@ var last_mouse_position
 @export var current_fruit := Fruit.FruitsEnum.CHERRY
 @export var next_fruit := Fruit.FruitsEnum.CHERRY
 
+# this will be set by signal
+var debug_enabled := false
+var danger_zone := false
+
 # stats stuff
 var dropped_fruits = {}
 var made_fruits = {}
@@ -44,7 +48,8 @@ func _set_game_over(state):
 		game_over = state
 		if not Engine.is_editor_hint():
 			if game_over:
-				set_game_state.emit(Game.States.GAMEOVER)
+				pass
+				#set_game_state.emit(Game.States.GAMEOVER)
 			else:
 				set_game_state.emit(Game.States.PLAYING)
 
@@ -124,8 +129,6 @@ func _reset_playfield():
 func _handle_score(points):
 	player_score += points
 	$MergeSoundPlayer.play()
-	if player_score > best_score:
-		best_score = player_score
 	print("Scored points: {x}".format({"x": points}))
 
 func _handle_made(fruit_type):
@@ -187,10 +190,12 @@ func _physics_process(delta):
 		var mouse_pos = get_local_mouse_position()
 		if (
 			mouse_pos != last_mouse_position
-			and mouse_pos.x > container_thickness + current_fruit_radius 
-			and mouse_pos.x < container_thickness + container_width - current_fruit_radius
 		):
-			$Player.position.x = mouse_pos.x
+			$Player.position.x = clamp(
+				mouse_pos.x,
+				container_thickness + current_fruit_radius,
+				container_thickness + container_width - current_fruit_radius
+			)
 		last_mouse_position = mouse_pos
 		if Input.is_action_pressed("move_left"):
 			$Player.position.x = max(
@@ -225,7 +230,22 @@ func _input(event):
 				if time_to_fruits[Fruit.FruitsEnum.keys()[current_fruit]] == -1:
 					time_to_fruits[Fruit.FruitsEnum.keys()[current_fruit]] = floor((Time.get_ticks_msec() - start_time) / 1000)
 				add_child(dropped_fruit)
+				dropped_fruit._on_debug_changed(debug_enabled)
 				$DropSoundPlayer.play()
+				
+				if not danger_zone:
+					if _calc_area() > .60:
+						$NatsumiDangerPlayer.play()
+						danger_zone = true
+				else:
+					if _calc_area() < .45:
+						danger_zone = false
+					else:
+						var rand_num = randf()
+						if rand_num > .6:
+							$NatsumiGrunt1Player.play()
+						elif rand_num > .3:
+							$NatsumiGrunt2Player.play()
 				
 				# setup next fruit
 				current_fruit = next_fruit
@@ -248,12 +268,23 @@ func _input(event):
 	if event.is_action_pressed("reset"):
 		reset()
 	if event.is_action_pressed("debug_game_over"):
-		#_game_over()
-		pass
+		set_stats.emit({
+			"dropped_fruits": dropped_fruits,
+			"made_fruits": made_fruits,
+			"time_to_fruits": time_to_fruits,
+			"elapsed_time": floor((Time.get_ticks_msec() - start_time) / 1000),
+			"score": player_score,
+			"best_score": best_score,
+			"playfield_coverage": _calc_area()
+		})
+		set_game_state.emit(Game.States.GAMEOVER)
+		if player_score > best_score:
+			best_score = player_score
+		_game_over()
+		#pass
 
 func _game_over():
 	game_over = true
-	$GameOverSoundPlayer.play()
 	for c in get_children():
 		if c.is_in_group("fruits"):
 			c.freeze_fruit()
@@ -275,6 +306,7 @@ func reset():
 	_reset_stats()
 	$ResetGameSoundPlayer.play()
 	game_over = false
+	danger_zone = false
 
 func _on_area_2d_body_exited(body):
 	if body.is_in_group("fruits"):
@@ -290,10 +322,13 @@ func _on_area_2d_body_entered(body):
 				"time_to_fruits": time_to_fruits,
 				"elapsed_time": floor((Time.get_ticks_msec() - start_time) / 1000),
 				"score": player_score,
+				"best_score": best_score,
 				"playfield_coverage": _calc_area()
 			})
+			set_game_state.emit(Game.States.GAMEOVER)
+			if player_score > best_score:
+				best_score = player_score
 			_game_over()
-
 
 func _on_game_state_changed(state):
 	if state == Game.States.PLAYING:
@@ -301,10 +336,20 @@ func _on_game_state_changed(state):
 	else:
 		game_over = true
 
-
 func _on_drop_timer_timeout():
 	can_drop = true
 
-
 func _on_options_screen_request_save():
+	_save_game()
+
+func _on_game_debug_changed(new_debug):
+	debug_enabled = new_debug
+	$Container._on_debug_changed(debug_enabled)
+	$Player._on_debug_changed(debug_enabled)
+	for f in get_children():
+		if f.is_in_group("fruits"):
+			f._on_debug_changed(debug_enabled)
+
+func _on_options_screen_request_clear_data():
+	best_score = 0
 	_save_game()
