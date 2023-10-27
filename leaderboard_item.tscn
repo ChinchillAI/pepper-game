@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2xdicnw66m7e"]
+
+[ext_resource type="LabelSettings" uid="uid://bjh2hklnobn5p" path="res://standard_font.tres" id="1_8tqg4"]
+[ext_resource type="PackedScene" uid="uid://co12pe0ajl0pk" path="res://fruit.tscn" id="2_okvva"]
+
+[node name="LeaderboardItem" type="HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+offset_right = 190.0
+offset_bottom = 27.0
+
+[node name="Place" type="Label" parent="."]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+text = "99"
+label_settings = ExtResource("1_8tqg4")
+horizontal_alignment = 1
+
+[node name="Score" type="Label" parent="."]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+text = "99999"
+label_settings = ExtResource("1_8tqg4")
+horizontal_alignment = 2
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+
+[node name="Fruit" parent="Control" instance=ExtResource("2_okvva")]
+position = Vector2(10, 10)
+collision_layer = 0
+collision_mask = 0
+max_contacts_reported = 0
+freeze = true
+display_size = 2
+
+[node name="Username" type="Label" parent="."]
+layout_mode = 2
+text = "AboveSuspicion"
+label_settings = ExtResource("1_8tqg4")

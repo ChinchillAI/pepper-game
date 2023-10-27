@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://es1orhhxtriv"]
 
 [ext_resource type="Script" path="res://score_display.gd" id="1_yrh1n"]
-[ext_resource type="Texture2D" uid="uid://dvj5dgxt8fcuv" path="res://images/bubble_transparent.png" id="2_qc1bo"]
+[ext_resource type="Texture2D" uid="uid://bpefk2du8jkfa" path="res://images/bubble_transparent.png" id="2_qc1bo"]
 [ext_resource type="FontFile" uid="uid://jway2q5bniar" path="res://fonts/NotoSansJP-VariableFont_wght.ttf" id="4_xevy1"]
 
 [sub_resource type="FontVariation" id="FontVariation_jy4ti"]

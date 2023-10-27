@@ -5,6 +5,7 @@ class_name Playfield
 signal score_changed(score)
 signal best_score_changed(score)
 signal next_fruit_changed(fruit_type)
+signal best_fruit_changed(fruit_type)
 signal set_game_state(state)
 signal set_stats(stats)
 
@@ -18,7 +19,7 @@ signal set_stats(stats)
 @export var player_speed := 200.
 
 @export var player_score := 0 : set = _set_player_score
-@export var best_score := 0 : set = _set_best_score
+var best_score := 0 : set = _set_best_score
 # this should really be playfield input accepted now, but w/e
 var game_over := false : set = _set_game_over
 var can_drop := true
@@ -37,6 +38,7 @@ var dropped_fruits = {}
 var made_fruits = {}
 var time_to_fruits = {}
 var start_time = 0
+var used_area = 0
 
 
 func _set_buffer_top(new_top):
@@ -133,20 +135,26 @@ func _handle_score(points):
 
 func _handle_made(fruit_type):
 	made_fruits[Fruit.FruitsEnum.keys()[fruit_type]] += 1
+	used_area -= 2 * PI * pow($Player/Fruit.fruits_dict[fruit_type-1]["radius"], 2) / (container_width * container_height)
+	used_area += PI * pow($Player/Fruit.fruits_dict[fruit_type]["radius"], 2) / (container_width * container_height)
 	if time_to_fruits[Fruit.FruitsEnum.keys()[fruit_type]] == -1:
 		time_to_fruits[Fruit.FruitsEnum.keys()[fruit_type]] = floor((Time.get_ticks_msec() - start_time) / 1000)
+		best_fruit_changed.emit(Fruit.FruitsEnum.keys()[fruit_type])
 
 # See https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html
 func _save_game():
 	var save_game = FileAccess.open("user://savegame.save", FileAccess.WRITE)
 	save_game.store_line(JSON.stringify({
 		"best_score": best_score,
+		"natsumi_mute": AudioServer.is_bus_mute(AudioServer.get_bus_index("Natsumi")),
+		"natsumi_vol": AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Natsumi")),
 		"music_mute": AudioServer.is_bus_mute(AudioServer.get_bus_index("Music")),
 		"music_vol": AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")),
 		"sfx_mute": AudioServer.is_bus_mute(AudioServer.get_bus_index("SFX")),
 		"sfx_vol": AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX")),
 		"master_mute": AudioServer.is_bus_mute(AudioServer.get_bus_index("Master")),
 		"master_vol": AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")),
+		"debug_enabled": debug_enabled,
 		"language": TranslationServer.get_locale()
 	}))
 	
@@ -168,6 +176,10 @@ func _load_game():
 		
 		best_score = save_data["best_score"]
 		
+		if save_data.has("natsumi_mute"):
+			AudioServer.set_bus_mute(AudioServer.get_bus_index("Natsumi"), save_data["natsumi_mute"])
+		if save_data.has("natsumi_vol"):
+			AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Natsumi"), save_data["natsumi_vol"])
 		if save_data.has("music_mute"):
 			AudioServer.set_bus_mute(AudioServer.get_bus_index("Music"), save_data["music_mute"])
 		if save_data.has("music_vol"):
@@ -182,6 +194,8 @@ func _load_game():
 			AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), save_data["master_vol"])
 		if save_data.has("language"):
 			TranslationServer.set_locale(save_data["language"])
+		if save_data.has("debug_enabled"):
+			debug_enabled = save_data["debug_enabled"]
 	
 
 func _physics_process(delta):
@@ -229,16 +243,18 @@ func _input(event):
 				dropped_fruit.made.connect(_handle_made)
 				if time_to_fruits[Fruit.FruitsEnum.keys()[current_fruit]] == -1:
 					time_to_fruits[Fruit.FruitsEnum.keys()[current_fruit]] = floor((Time.get_ticks_msec() - start_time) / 1000)
+					best_fruit_changed.emit(Fruit.FruitsEnum.keys()[current_fruit])
 				add_child(dropped_fruit)
 				dropped_fruit._on_debug_changed(debug_enabled)
 				$DropSoundPlayer.play()
 				
+				used_area += PI * pow(dropped_fruit.fruits_dict[dropped_fruit.fruit_type]["radius"],2) / (container_height * container_width)
 				if not danger_zone:
-					if _calc_area() > .60:
+					if used_area > .60:
 						$NatsumiDangerPlayer.play()
 						danger_zone = true
 				else:
-					if _calc_area() < .45:
+					if used_area < .45:
 						danger_zone = false
 					else:
 						var rand_num = randf()
@@ -268,20 +284,21 @@ func _input(event):
 	if event.is_action_pressed("reset"):
 		reset()
 	if event.is_action_pressed("debug_game_over"):
-		set_stats.emit({
-			"dropped_fruits": dropped_fruits,
-			"made_fruits": made_fruits,
-			"time_to_fruits": time_to_fruits,
-			"elapsed_time": floor((Time.get_ticks_msec() - start_time) / 1000),
-			"score": player_score,
-			"best_score": best_score,
-			"playfield_coverage": _calc_area()
-		})
-		set_game_state.emit(Game.States.GAMEOVER)
-		if player_score > best_score:
-			best_score = player_score
-		_game_over()
-		#pass
+#		set_stats.emit({
+#			"dropped_fruits": dropped_fruits,
+#			"made_fruits": made_fruits,
+#			"time_to_fruits": time_to_fruits,
+#			"elapsed_time": floor((Time.get_ticks_msec() - start_time) / 1000),
+#			"score": player_score,
+#			"best_score": best_score,
+#			"playfield_coverage": used_area
+#		})
+#		set_game_state.emit(Game.States.GAMEOVER)
+#		if player_score > best_score:
+#			best_score = player_score
+#		_game_over()
+		#player_score += 2000
+		pass
 
 func _game_over():
 	game_over = true
@@ -289,14 +306,6 @@ func _game_over():
 		if c.is_in_group("fruits"):
 			c.freeze_fruit()
 	_save_game() 
-			
-func _calc_area():
-	var max_area = container_height * container_width
-	var used_area = 0
-	for c in get_children():
-		if c.is_in_group("fruits"):
-			used_area += PI * pow(c.fruits_dict[c.fruit_type]["radius"],2)
-	return used_area / max_area
 
 func reset():
 	for c in get_children():
@@ -304,9 +313,11 @@ func reset():
 			c.queue_free()
 	_reset_playfield()
 	_reset_stats()
+	best_fruit_changed.emit("CHERRY")
 	$ResetGameSoundPlayer.play()
 	game_over = false
 	danger_zone = false
+	used_area = 0
 
 func _on_area_2d_body_exited(body):
 	if body.is_in_group("fruits"):
@@ -323,7 +334,7 @@ func _on_area_2d_body_entered(body):
 				"elapsed_time": floor((Time.get_ticks_msec() - start_time) / 1000),
 				"score": player_score,
 				"best_score": best_score,
-				"playfield_coverage": _calc_area()
+				"playfield_coverage": used_area
 			})
 			set_game_state.emit(Game.States.GAMEOVER)
 			if player_score > best_score:

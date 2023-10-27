@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://drgda3y474h6b"]
+
+[ext_resource type="Script" path="res://leaderboard.gd" id="1_3wwlo"]
+[ext_resource type="PackedScene" uid="uid://b2xdicnw66m7e" path="res://leaderboard_item.tscn" id="2_aak6k"]
+[ext_resource type="LabelSettings" uid="uid://fl4mi3ico5hy" path="res://subtitle_font.tres" id="2_cjher"]
+
+[node name="LeaderBoard" type="Node2D"]
+script = ExtResource("1_3wwlo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -15.5
+offset_right = 56.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "LEADERBOARD"
+label_settings = ExtResource("2_cjher")
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(220, 189)
+layout_mode = 2
+
+[node name="LeaderboardItem1" parent="VBoxContainer/Control" instance=ExtResource("2_aak6k")]
+layout_mode = 2
+offset_right = 214.0
+
+[node name="LeaderboardItem2" parent="VBoxContainer/Control" instance=ExtResource("2_aak6k")]
+layout_mode = 2
+offset_top = 27.0
+offset_right = 214.0
+offset_bottom = 54.0
+
+[node name="LeaderboardItem3" parent="VBoxContainer/Control" instance=ExtResource("2_aak6k")]
+layout_mode = 2
+offset_top = 54.0
+offset_right = 214.0
+offset_bottom = 81.0
+
+[node name="LeaderboardItem4" parent="VBoxContainer/Control" instance=ExtResource("2_aak6k")]
+layout_mode = 2
+offset_top = 81.0
+offset_right = 214.0
+offset_bottom = 108.0
+
+[node name="LeaderboardItem5" parent="VBoxContainer/Control" instance=ExtResource("2_aak6k")]
+layout_mode = 2
+offset_top = 108.0
+offset_right = 214.0
+offset_bottom = 135.0
+
+[node name="LeaderboardItem6" parent="VBoxContainer/Control" instance=ExtResource("2_aak6k")]
+layout_mode = 2
+offset_top = 135.0
+offset_right = 214.0
+offset_bottom = 162.0
+
+[node name="LeaderboardItem7" parent="VBoxContainer/Control" instance=ExtResource("2_aak6k")]
+layout_mode = 2
+offset_top = 162.0
+offset_right = 214.0
+offset_bottom = 189.0

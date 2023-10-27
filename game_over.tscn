@@ -1,10 +1,10 @@
 [gd_scene load_steps=26 format=3 uid="uid://cov7ipnemtxng"]
 
 [ext_resource type="Script" path="res://game_over.gd" id="1_k5lob"]
-[ext_resource type="Texture2D" uid="uid://dj8yus3l6vhh8" path="res://images/confetti.png" id="2_43jro"]
+[ext_resource type="Texture2D" uid="uid://q8l5gj7qkiks" path="res://images/confetti.png" id="2_43jro"]
 [ext_resource type="FontFile" uid="uid://jway2q5bniar" path="res://fonts/NotoSansJP-VariableFont_wght.ttf" id="2_cueap"]
 [ext_resource type="PackedScene" uid="uid://co12pe0ajl0pk" path="res://fruit.tscn" id="3_x45n7"]
-[ext_resource type="Texture2D" uid="uid://boi4i4nnhjq1b" path="res://images/confetti2.png" id="3_yqhwo"]
+[ext_resource type="Texture2D" uid="uid://cljfq6i8nbxwh" path="res://images/confetti2.png" id="3_yqhwo"]
 [ext_resource type="LabelSettings" uid="uid://bjh2hklnobn5p" path="res://standard_font.tres" id="5_75yex"]
 [ext_resource type="AudioStream" uid="uid://crnqy86vmfoy3" path="res://sounds/confetti.wav" id="7_2isur"]
 [ext_resource type="AudioStream" uid="uid://dtrbbcfpvyjox" path="res://sounds/trap.wav" id="8_1j4nq"]
@@ -33,6 +33,8 @@ angular_velocity_min = 120.0
 angular_velocity_max = 195.0
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
+scale_min = 2.0
+scale_max = 2.5
 color_initial_ramp = SubResource("GradientTexture1D_tindr")
 turbulence_noise_strength = 8.08
 turbulence_noise_speed = Vector3(5, 5, 0)

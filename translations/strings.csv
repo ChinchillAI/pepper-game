@@ -31,3 +31,5 @@ CLEAR_DATA,Erase Game Data,ゲームデータの消去,Borrar datos del juego,Ap
 ENABLED,Enabled,有効,Activado,Ativado
 DISABLED,Disabled,無効,Desactivado,Desativado
 NATSUMI,Natsumi,なつみ,Natsumi,Natsumi
+LEADERBOARD,Leaderboard,リーダーボード,Clasificación,Classificação
+CURRENT_GAME,(Current),「現在」,(Actual),(Atual)

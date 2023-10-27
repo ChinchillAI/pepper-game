@@ -1,20 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfa66t1nbt6xl"]
+[gd_scene load_steps=3 format=3 uid="uid://bfa66t1nbt6xl"]
 
 [ext_resource type="Script" path="res://fruit_legend.gd" id="1_f3jkv"]
-[ext_resource type="FontFile" uid="uid://jway2q5bniar" path="res://fonts/NotoSansJP-VariableFont_wght.ttf" id="2_om4ej"]
-
-[sub_resource type="FontVariation" id="FontVariation_no05i"]
-base_font = ExtResource("2_om4ej")
-variation_opentype = {
-2003265652: 400
-}
-
-[sub_resource type="LabelSettings" id="LabelSettings_wsyft"]
-line_spacing = 0.0
-font = SubResource("FontVariation_no05i")
-font_size = 22
-outline_size = 7
-outline_color = Color(0, 0, 0, 1)
+[ext_resource type="LabelSettings" uid="uid://fl4mi3ico5hy" path="res://subtitle_font.tres" id="2_pvod0"]
 
 [node name="FruitLegend" type="Node2D"]
 script = ExtResource("1_f3jkv")
@@ -32,17 +19,17 @@ offset_bottom = -79.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "PROMOTION_ORDER"
-label_settings = SubResource("LabelSettings_wsyft")
+label_settings = ExtResource("2_pvod0")
 horizontal_alignment = 1
 
 [connection signal="body_entered" from="Fruit" to="Fruit" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="@RigidBody2D@20559" to="@RigidBody2D@20559" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="@RigidBody2D@20560" to="@RigidBody2D@20560" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="@RigidBody2D@20561" to="@RigidBody2D@20561" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="@RigidBody2D@20562" to="@RigidBody2D@20562" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="@RigidBody2D@20563" to="@RigidBody2D@20563" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="@RigidBody2D@20564" to="@RigidBody2D@20564" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="@RigidBody2D@20565" to="@RigidBody2D@20565" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="@RigidBody2D@20566" to="@RigidBody2D@20566" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="@RigidBody2D@20567" to="@RigidBody2D@20567" method="_on_body_entered" flags=18]
-[connection signal="body_entered" from="@RigidBody2D@20568" to="@RigidBody2D@20568" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@20620" to="@RigidBody2D@20620" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@20621" to="@RigidBody2D@20621" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@20622" to="@RigidBody2D@20622" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@20623" to="@RigidBody2D@20623" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@20624" to="@RigidBody2D@20624" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@20625" to="@RigidBody2D@20625" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@20626" to="@RigidBody2D@20626" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@20627" to="@RigidBody2D@20627" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@20628" to="@RigidBody2D@20628" method="_on_body_entered" flags=18]
+[connection signal="body_entered" from="@RigidBody2D@20629" to="@RigidBody2D@20629" method="_on_body_entered" flags=18]
