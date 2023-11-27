@@ -134,6 +134,8 @@ func _handle_score(points):
 	print("Scored points: {x}".format({"x": points}))
 
 func _handle_made(fruit_type):
+	if Fruit.FruitsEnum.keys()[fruit_type] == "WATERMELON":
+		return
 	made_fruits[Fruit.FruitsEnum.keys()[fruit_type]] += 1
 	used_area -= 2 * PI * pow($Player/Fruit.fruits_dict[fruit_type-1]["radius"], 2) / (container_width * container_height)
 	used_area += PI * pow($Player/Fruit.fruits_dict[fruit_type]["radius"], 2) / (container_width * container_height)

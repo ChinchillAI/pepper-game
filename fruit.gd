@@ -110,6 +110,9 @@ func _set_fruit_type(new_fruit_type):
 	_create_fruit()
 
 func _promote_fruit():
+	if fruit_type == FruitsEnum.WATERMELON:
+		queue_free()
+		return
 	fruit_type = fruit_type + 1 as FruitsEnum
 
 func _create_fruit():
@@ -172,7 +175,8 @@ func _on_body_entered(body):
 			body.free()
 			call_deferred("_promote_fruit")
 			score.emit(pow(2,fruit_type + 1) - 1)
-			made.emit(fruit_type + 1)
+			if fruit_type != FruitsEnum.WATERMELON:
+				made.emit(fruit_type + 1)
 		else:
 			if not freeze:
 				var overlap = position.distance_to(body.position) - body.fruits_dict[body.fruit_type].radius - fruits_dict[fruit_type].radius

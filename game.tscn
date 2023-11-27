@@ -24,7 +24,6 @@ centered = false
 position = Vector2(267, 14)
 container_height = 340.0
 current_fruit = 2
-next_fruit = 0
 
 [node name="ScoreDisplay" parent="." instance=ExtResource("2_mqihc")]
 position = Vector2(134, 105)
